@@ -574,7 +574,6 @@ class _CSCPickerState extends State<CSCPicker> {
   Future<void> setDefaults() async {
     if (widget.currentCountry != null) {
       setState(() => _selectedCountry = widget.currentCountry);
-      await getStates();
     }
     if (widget.currentCity != null) {
       setState(() => _selectedCity = widget.currentCity!);
@@ -617,39 +616,6 @@ class _CSCPickerState extends State<CSCPicker> {
     return _country;
   }
 
-  ///get states from json response
-  Future<List<String?>> getStates() async {
-    _states.clear();
-    //print(_selectedCountry);
-    var response = await getResponse();
-    var takeState = widget.flagState == CountryFlag.ENABLE ||
-            widget.flagState == CountryFlag.SHOW_IN_DROP_DOWN_ONLY
-        ? response
-            .map((map) => Country.fromJson(map))
-            .where(
-                (item) => item.emoji + "    " + item.name == _selectedCountry)
-            .map((item) => item.state)
-            .toList()
-        : response
-            .map((map) => Country.fromJson(map))
-            .where((item) => item.name == _selectedCountry)
-            .map((item) => item.state)
-            .toList();
-    var states = takeState as List;
-    states.forEach((f) {
-      if (!mounted) return;
-      setState(() {
-        var name = f.map((item) => item.name).toList();
-        for (var stateName in name) {
-          //print(stateName.toString());
-          _states.add(stateName.toString());
-        }
-      });
-    });
-    _states.sort((a, b) => a!.compareTo(b!));
-    return _states;
-  }
-
   ///get cities from json response
   Future<List<String?>> getCities() async {
     _cities.clear();
@@ -689,7 +655,6 @@ class _CSCPickerState extends State<CSCPicker> {
         _selectedCity = "Şehir";
         this.widget.onCityChanged!(null);
         _selectedCountry = value;
-        getStates();
       } else {
         this.widget.onCityChanged!(_selectedCity);
       }
@@ -729,17 +694,6 @@ class _CSCPickerState extends State<CSCPicker> {
         .toList();
     if (filteredList.isEmpty)
       return _country;
-    else
-      return filteredList;
-  }
-
-  ///filter Sate Data according to user input
-  Future<List<String?>> getStateData(filter) async {
-    var filteredList = _states
-        .where((state) => state!.toLowerCase().contains(filter.toLowerCase()))
-        .toList();
-    if (filteredList.isEmpty)
-      return _states;
     else
       return filteredList;
   }
