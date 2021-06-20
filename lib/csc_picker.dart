@@ -674,15 +674,20 @@ class _CSCPickerState extends State<CSCPicker> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        countryDropdown(),
-        SizedBox(
-          width: 15.0,
-        ),
-        cityDropdown()
-      ],
+    return SizedBox(
+      height: 300,
+      width: MediaQuery.of(context).size.width,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          countryDropdown(),
+          SizedBox(
+            width: 15.0,
+          ),
+          cityDropdown()
+        ],
+      ),
     );
   }
 
