@@ -565,7 +565,7 @@ class _CSCPickerState extends State<CSCPicker> {
   List<String?> _country = [];
   List<String?> _states = [];
 
-  String _selectedCity = 'City';
+  String _selectedCity = 'Şehir';
   String? _selectedCountry;
   String _selectedState = 'State';
   var responses;
@@ -713,7 +713,7 @@ class _CSCPickerState extends State<CSCPicker> {
         _states.clear();
         _cities.clear();
         _selectedState = "State";
-        _selectedCity = "City";
+        _selectedCity = "Şehir";
         this.widget.onStateChanged!(null);
         this.widget.onCityChanged!(null);
         _selectedCountry = value;
@@ -837,8 +837,8 @@ class _CSCPickerState extends State<CSCPicker> {
   ///Country Dropdown Widget
   Widget countryDropdown() {
     return DropdownWithSearch(
-      title: "Country",
-      placeHolder: "Search Country",
+      title: "Ülke",
+      placeHolder: "Ülke adı girin",
       selectedItemStyle: widget.selectedItemStyle,
       dropdownHeadingStyle: widget.dropdownHeadingStyle,
       itemStyle: widget.dropdownItemStyle,
@@ -892,8 +892,8 @@ class _CSCPickerState extends State<CSCPicker> {
   ///City Dropdown Widget
   Widget cityDropdown() {
     return DropdownWithSearch(
-      title: "City",
-      placeHolder: "Search City",
+      title: "Şehir",
+      placeHolder: "Şehir adı girin",
       disabled: _cities.length == 0 ? true : false,
       items: _cities.map((String? dropDownStringItem) {
         return dropDownStringItem;
