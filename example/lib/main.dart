@@ -51,7 +51,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 ///Adding CSC Picker Widget in app
                 CSCPicker(
                   ///Enable disable state dropdown [OPTIONAL PARAMETER]
-                  showStates: true,
 
                   /// Enable disable city drop down [OPTIONAL PARAMETER]
                   showCities: true,
@@ -105,14 +104,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     setState(() {
                       ///store value in country variable
                       countryValue = value;
-                    });
-                  },
-
-                  ///triggers once state selected in dropdown
-                  onStateChanged: (value) {
-                    setState(() {
-                      ///store value in state variable
-                      stateValue = value;
                     });
                   },
 
